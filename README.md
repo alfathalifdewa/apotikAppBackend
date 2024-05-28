@@ -7,6 +7,7 @@ npm install
 npm install -g nodemon
 npm start
 ```
+> Copy isi file `.env.example`Lalu buat dan paste isi nya ke dalam file `.env` 
 
 ## Routes
 
