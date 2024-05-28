@@ -17,7 +17,7 @@ export const register = async (req, res) => {
         user.password = await bcrypt.hash(password, salt);
 
         await user.save();
-        res.json({ "message" : "User Registered" });
+        res.json({ msg : "User Registered" });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
