@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const register = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, email, password, img_url, phone } = req.body;
 
     try {
         let user = await User.findOne({ username });
@@ -11,7 +11,7 @@ export const register = async (req, res) => {
             return res.status(400).json({ msg: 'User already exists' });
         }
 
-        user = new User({ username, password });
+        user = new User({ username, email, password, img_url, phone });
 
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
@@ -51,3 +51,14 @@ export const login = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
+
+export const getUsers = async (req, res) => {
+    try {
+        const users = await User.findById(req.user.id).select('-password'); // Exclude the password field
+        res.json(users);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
