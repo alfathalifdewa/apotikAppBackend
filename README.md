@@ -15,5 +15,6 @@ npm start
 | ------ | ------ | ------ |
 | LOGIN | localhost:5000/users/login | POST |
 | REGISTER | localhost:5000/users/register | POST |
+| GET USER LOGIN | localhost:5000/users | GET |
 | GET PRODUCTS | localhost:5000/products | GET |
 | SAVE PRODUCT | localhost:5000/products | POST |
