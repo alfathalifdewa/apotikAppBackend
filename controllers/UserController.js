@@ -11,6 +11,11 @@ export const register = async (req, res) => {
             return res.status(400).json({ msg: 'User already exists' });
         }
 
+        let emailCheck = await User.findOne({ email });
+        if (emailCheck) {
+            return res.status(400).json({ msg: 'Email already exists' });
+        }
+
         user = new User({ username, email, password, img_url, phone });
 
         const salt = await bcrypt.genSalt(10);
@@ -54,11 +59,21 @@ export const login = async (req, res) => {
 
 export const getUsers = async (req, res) => {
     try {
-        const users = await User.findById(req.user.id).select('-password'); // Exclude the password field
+        const users = await User.findById(req.user.id).select('-password');
         res.json(users);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
     }
 };
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const allUsers = await User.find().select('-password');
+        res.json(allUsers);
+    } catch (error) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+}
 
