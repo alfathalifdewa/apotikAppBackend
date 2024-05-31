@@ -7,7 +7,7 @@ const ProductSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    category: {
+    id_category: {
       type: String,
       required: false,
     },

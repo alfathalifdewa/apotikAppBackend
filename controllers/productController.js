@@ -11,11 +11,11 @@ export const getProducts = async (req, res) => {
 };
 
 export const postProducts = async (req, res) => {
-  const { productName, category, golongan, deskripsi, price } = req.body;
+  const { productName, id_category, golongan, deskripsi, price } = req.body;
   try {
     const newProduct = new Product({
       productName,
-      category,
+      id_category,
       golongan,
       deskripsi,
       price,
@@ -42,7 +42,7 @@ export const getProductsById = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
-  const { productName, category, golongan, deskripsi, price } = req.body;
+  const { productName, id_category, golongan, deskripsi, price } = req.body;
 
   try {
     let product = await Product.findById(id);
@@ -52,7 +52,7 @@ export const updateProduct = async (req, res) => {
     }
 
     product.productName = productName || product.productName;
-    product.category = category || product.category;
+    product.id_category = id_category || product.id_category;
     product.golongan = golongan || product.golongan;
     product.deskripsi = deskripsi || product.deskripsi;
     product.price = price || product.price;
