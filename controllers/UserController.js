@@ -77,3 +77,57 @@ export const getAllUsers = async (req, res) => {
     }
 }
 
+export const updateUser = async (req, res) => {
+    const { username, email, img_url, phone, password } = req.body;
+
+    try {
+        let user = await User.findById(req.user.id);
+        if (!user) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
+        // Check if the username is being updated and if it's already taken
+        if (username && username !== user.username) {
+            const usernameExists = await User.findOne({ username });
+            if (usernameExists) {
+                return res.status(400).json({ msg: 'Username already exists' });
+            }
+            user.username = username;
+        }
+
+        // Check if the email is being updated and if it's already taken
+        if (email && email !== user.email) {
+            const emailExists = await User.findOne({ email });
+            if (emailExists) {
+                return res.status(400).json({ msg: 'Email already exists' });
+            }
+            user.email = email;
+        }
+
+        if (img_url) user.img_url = img_url;
+        if (phone) user.phone = phone;
+
+        if (password) {
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(password, salt);
+        }
+
+        await user.save();
+        res.json({ msg: 'User updated successfully', user });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+export const logout = async (req, res) => {
+    try {
+        // You can use token blacklisting or simply clear the token from the client side
+        res.clearCookie('token'); // Clear the token cookie
+        res.json({ msg: 'Logout successful' });
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
