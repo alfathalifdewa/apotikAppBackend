@@ -21,4 +21,8 @@ npm start
 | SAVE PRODUCT | localhost:5000/products | POST | ADMIN/SUPERADMIN |
 | UPDATE PRODUCT | localhost:5000/products/:id | PUT | ADMIN/SUPERADMIN |
 | DELETE PRODUCT | localhost:5000/products/:id | DELETE | ADMIN/SUPERADMIN |
+| GET CARTS | localhost:5000/cart | GET | USER/ADMIN/SUPERADMIN |
+| ADD CARTS | localhost:5000/cart | POST | USER/ADMIN/SUPERADMIN |
+| UPDATE CARTS | localhost:5000/cart/update | PUT | USER/ADMIN/SUPERADMIN |
+| DELETE CARTS | localhost:5000/cart/delete/:productId | GET | USER/ADMIN/SUPERADMIN |
 
