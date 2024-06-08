@@ -24,5 +24,5 @@ npm start
 | GET CARTS | localhost:5000/cart | GET | USER/ADMIN/SUPERADMIN |
 | ADD CARTS | localhost:5000/cart | POST | USER/ADMIN/SUPERADMIN |
 | UPDATE CARTS | localhost:5000/cart/update | PUT | USER/ADMIN/SUPERADMIN |
-| DELETE CARTS | localhost:5000/cart/delete/:productId | GET | USER/ADMIN/SUPERADMIN |
+| DELETE CARTS | `ON PROGGRESS` | DELETE | USER/ADMIN/SUPERADMIN |
 
