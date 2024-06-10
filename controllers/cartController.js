@@ -82,6 +82,29 @@ export const updateCart = async (req, res) => {
         res.status(500).send('Server error');
     }
 }
-export const deleteCart = (req, res) => {
-    res.send('Delete Cart')
-}
+
+export const deleteCart = async (req, res) => {
+    const { productId } = req.params;
+    const userId = req.user.id;
+
+    try {
+        const cart = await Cart.findOne({ user: userId });
+
+        if (!cart) {
+            return res.status(404).json({ msg: 'Cart not found' });
+        }
+
+        const productIndex = cart.items.findIndex(item => item.product.toString() === productId);
+
+        if (productIndex > -1) {
+            cart.items.splice(productIndex, 1);
+            const updatedCart = await cart.save();
+            return res.status(200).json({ msg: 'Product Deleted' });
+        } else {
+            return res.status(404).json({ msg: 'Product not found in cart' });
+        }
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server error');
+    }
+};

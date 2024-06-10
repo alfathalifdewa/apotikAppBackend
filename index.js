@@ -7,7 +7,8 @@ import cors from "cors";
 import userRoutes from "./routes/UserRoute.js";
 import productRoutes from "./routes/ProductRoutes.js";
 import categoryRoutes from "./routes/CategoryRoutes.js";
-import cartRoutes from "./routes/cartRoutes.js"
+import cartRoutes from "./routes/cartRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 dotenv.config();
 
@@ -21,7 +22,8 @@ app.use(cors());
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);
 app.use("/category", categoryRoutes);
-app.use("/cart", cartRoutes)
+app.use("/cart", cartRoutes);
+app.use("/order", orderRoutes);
 
 // Database Connection
 mongoose
