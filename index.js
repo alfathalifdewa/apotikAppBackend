@@ -18,6 +18,11 @@ const PORT = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(cors());
 
+// Test Build
+app.get('/', (req, res) => {
+  res.send("Hello World!");
+})
+
 // Routes
 app.use('/users', userRoutes);
 app.use('/products', productRoutes);
