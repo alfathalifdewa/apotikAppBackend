@@ -1,14 +1,14 @@
-import express from "express";
-import mongoose from "mongoose";
-import bodyParser from "body-parser";
-import dotenv from "dotenv";
-import cors from "cors";
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import cors from 'cors';
 
-import userRoutes from "./routes/UserRoute.js";
-import productRoutes from "./routes/ProductRoutes.js";
-import categoryRoutes from "./routes/CategoryRoutes.js";
-import cartRoutes from "./routes/cartRoutes.js";
-import orderRoutes from "./routes/orderRoutes.js";
+import userRoutes from './routes/UserRoute.js';
+import productRoutes from './routes/ProductRoutes.js';
+import categoryRoutes from './routes/CategoryRoutes.js';
+import cartRoutes from './routes/CartRoutes.js';
+import orderRoutes from './routes/OrderRoutes.js';
 
 dotenv.config();
 
@@ -19,16 +19,19 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Routes
-app.use("/users", userRoutes);
-app.use("/products", productRoutes);
-app.use("/category", categoryRoutes);
-app.use("/cart", cartRoutes);
-app.use("/order", orderRoutes);
+app.use('/users', userRoutes);
+app.use('/products', productRoutes);
+app.use('/category', categoryRoutes);
+app.use('/cart', cartRoutes);
+app.use('/order', orderRoutes);
 
 // Database Connection
 mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => console.log("MongoDB connected"))
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err));
 
 app.listen(PORT, () => {
