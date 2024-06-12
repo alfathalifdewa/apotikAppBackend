@@ -20,7 +20,7 @@ app.use(cors());
 
 // Test Build
 app.get('/', (req, res) => {
-  res.send("Hello World!");
+  res.send("Welcome To MyApotik!");
 })
 
 // Routes
