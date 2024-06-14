@@ -11,11 +11,43 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    golongan: {
+    image: {
+      type: String,
+      required: false,
+    },
+    desc: {
       type: String,
       required: true,
     },
-    deskripsi: {
+    indication: {
+      type: String,
+      required: true,
+    },
+    composition: {
+      type: String,
+      required: true,
+    },
+    dose: {
+      type: String,
+      required: true,
+    },
+    howtouse: {
+      type: String,
+      required: true,
+    },
+    effect: {
+      type: String,
+      required: true,
+    },
+    group: {
+      type: String,
+      required: true,
+    },
+    nie: {
+      type: String,
+      required: true,
+    },
+    desc: {
       type: String,
       required: true,
     },

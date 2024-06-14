@@ -11,10 +11,13 @@ import {
   authMiddleware,
   superAdminMiddleware,
 } from "../middleware/UserMiddleware.js";
+
 const router = express.Router();
+
 router.get("/", getProducts);
-router.post("/", authMiddleware, adminMiddleware, postProducts);
 router.get("/:productName", getProductsById);
+router.post("/", authMiddleware, adminMiddleware, postProducts);
 router.put("/:id", authMiddleware, adminMiddleware, updateProduct);
 router.delete("/:id", authMiddleware, superAdminMiddleware, deleteProduct);
+
 export default router;

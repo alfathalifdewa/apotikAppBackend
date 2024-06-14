@@ -12,11 +12,21 @@ export const getCategory = async (req, res) => {
 
 export const postCategory = async (req, res) => {
   const { id_category, name_category } = req.body;
+
   try {
+    const existingCategory = await Category.findOne({
+      $or: [{ id_category }, { name_category }]
+    });
+
+    if (existingCategory) {
+      return res.status(400).json({ msg: 'Category with this ID or name already exists' });
+    }
+
     const newCategory = new Category({
       id_category,
       name_category,
     });
+
     const saveCategory = await newCategory.save();
     res.status(201).json({ saveCategory });
   } catch (error) {
@@ -24,6 +34,7 @@ export const postCategory = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
 
 export const getProductByCategory = async (req, res) => {
   const { id } = req.params;
